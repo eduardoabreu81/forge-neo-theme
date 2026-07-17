@@ -1,0 +1,36 @@
+/* === Fluent Toast Error === */
+.toast-body {
+  background: rgba(5, 5, 5, 0.5) !important;
+  border-color: color-mix(in srgb, var(--fnt-surface1), var(--fnt-accent) 15%) !important;
+  backdrop-filter: blur(35px) !important;
+  box-shadow: 0 0 15px 0 rgba(255, 255, 255, 0.05);
+}
+.toast-icon {
+  color: var(--fnt-error) !important;
+}
+.timer {
+  background: var(--fnt-accent) !important;
+  margin: 0.25em;
+}
+
+.toast-close {
+  color: var(--fnt-accent) !important;
+  position: relative;
+  cursor: pointer;
+}
+.toast-close::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.toast-close:hover::before {
+  opacity: 1;
+}

@@ -1,0 +1,25 @@
+/* === Image Viewer === */
+#lightboxModal {
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  transition: all 0.2s ease;
+}
+.modalControls:hover:not(:has(.cursor)) {
+  backdrop-filter: blur(15px) grayscale(0.7);
+  background: rgba(0, 0, 0, 0.8) !important;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
+}
+/* Elements */
+#lightboxModal .modalPrev,
+#lightboxModal .modalNext {
+  background: var(--fnt-base0);
+  transition: all 0.2s ease;
+}
+#lightboxModal .modalPrev:hover,
+#lightboxModal .modalNext:hover {
+  background: var(--fnt-accent);
+  color: var(--fnt-base0) !important;
+}
+#lightboxModal .modalControls > span:hover {
+  color: var(--fnt-accent);
+}

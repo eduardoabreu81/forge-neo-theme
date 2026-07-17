@@ -1,0 +1,152 @@
+/* === Modern Flat Card Design (Extra-Network-Pane) ===
+   Ported from anxety-theme (MIT, https://github.com/anxety-solo/anxety-theme), with one
+   structural change: every rule is scoped under `body:not(.civitai-neo-card-theme)`.
+
+   sd-civitai-browser-neo (https://github.com/eduardoabreu81/sd-civitai-browser-neo) ships
+   its own opt-in "CivitAI-style card theme" that restyles the same native Extra Networks
+   cards (type/base-model badges, name, action buttons) and adds a `civitai-neo-card-theme`
+   class to <body> while it's active. Without the guard below, this module's absolute-
+   positioned name pill and hover-reveal button-row collide with that layout (name text
+   overlapping badges, action buttons rendering behind/on top of each other). With the
+   guard, this module simply goes inert whenever that other theme is turned on — no need
+   for the two extensions to coordinate beyond checking for that one class, and if
+   sd-civitai-browser-neo isn't installed at all, the class is never present and this module
+   behaves exactly like the original. */
+:root {
+  /* Effects */
+  --fnt-enp-blur: blur(10px);
+  --fnt-enp-card-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --fnt-enp-card-hover-shadow: 0 6px 16px rgba(0, 0, 0, 0.12), 0 0 0 2px var(--fnt-accent);
+
+  /* Card Styles */
+  --fnt-enp-card-text-size: 1.2em;
+
+  /* Card-Button */
+  --fnt-enp-card-radius: 12px;
+  --fnt-enp-button-row-bg: rgba(0, 0, 0, 0.7);
+  --fnt-enp-button-row-blur: var(--fnt-enp-blur);
+
+  /* Card Button Styles */
+  --fnt-enp-card-button-size: 32px;
+  --fnt-enp-card-button-radius: 8px;
+  --fnt-enp-card-button-bg: rgba(255, 255, 255, 0.15);
+  --fnt-enp-card-button-hover-bg: rgba(255, 255, 255, 0.25);
+  --fnt-enp-name-bg: rgba(0, 0, 0, 0.5);
+  --fnt-enp-name-bg-blur: var(--fnt-enp-blur);
+}
+
+/* --- Base Card Styles --- */
+body:not(.civitai-neo-card-theme) .extra-network-pane .card {
+  position: relative;
+  padding: 0;
+  border-radius: var(--fnt-enp-card-radius);
+  box-shadow: var(--fnt-enp-card-shadow);
+  text-align: center;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+body:not(.civitai-neo-card-theme) .extra-network-pane .card:hover {
+  box-shadow: var(--fnt-enp-card-hover-shadow);
+  transform: translateY(-2px);
+  z-index: 10;
+}
+
+/* === Button Row Styles === */
+body:not(.civitai-neo-card-theme) .extra-network-pane .card .button-row {
+  display: flex;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 12px 8px;
+  background: var(--fnt-enp-button-row-bg);
+  border-radius: 0 0 var(--fnt-enp-card-radius) var(--fnt-enp-card-radius);
+  backdrop-filter: var(--fnt-enp-button-row-blur);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  gap: 8px;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+body:not(.civitai-neo-card-theme) .extra-network-pane .card:hover .button-row {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* --- Card Button Styles --- */
+body:not(.civitai-neo-card-theme) .extra-network-pane .card .card-button {
+  display: flex;
+  width: var(--fnt-enp-card-button-size);
+  height: var(--fnt-enp-card-button-size);
+  background: var(--fnt-enp-card-button-bg);
+  border-radius: var(--fnt-enp-card-button-radius);
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  transition: all 0.2s ease;
+}
+body:not(.civitai-neo-card-theme) .extra-network-pane .card .card-button:hover {
+  background: var(--fnt-enp-card-button-hover-bg);
+  transform: scale(1.1);
+}
+
+/* --- Hover Icon Color Styles --- */
+body:not(.civitai-neo-card-theme) .goto-civitbrowser.card-button:hover svg path,
+body:not(.civitai-neo-card-theme) .extra-network-pane .card .card-button:hover svg,
+body:not(.civitai-neo-card-theme) .extra-network-pane .card .button-row > .card-button:hover {
+  fill: var(--fnt-accent);
+  color: var(--fnt-accent);
+}
+
+/* --- Name/Title Block Styles --- */
+body:not(.civitai-neo-card-theme) .extra-network-pane .card .actions {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  right: 0;
+  left: 0;
+  padding: 10px;
+  background: transparent;
+  align-items: center;
+  transition: all 0.3s ease;
+  z-index: 1;
+}
+
+body:not(.civitai-neo-card-theme) .extra-network-pane .card .name {
+  padding: 6px 12px;
+  max-width: 100%;
+  color: white;
+  font-size: var(--fnt-enp-card-text-size) !important;
+  background: var(--fnt-enp-name-bg);
+  border: 1px solid var(--fnt-overlay2);
+  border-radius: 20px;
+  backdrop-filter: var(--fnt-enp-name-bg-blur);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1;
+  transition: all 0.2s ease;
+}
+body:not(.civitai-neo-card-theme) .extra-network-pane .card .name:hover {
+  overflow: visible;
+  white-space: normal;
+  text-overflow: clip;
+  line-height: 1.25;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* --- Utility Fixes --- */
+body:not(.civitai-neo-card-theme) .copy-path-button {
+  margin: 0 !important;
+}
+
+body:not(.civitai-neo-card-theme) .extra-network-pane .card .description {
+  display: none !important;
+}
