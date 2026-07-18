@@ -1,6 +1,6 @@
 :root {
   /* ACCENT COLOR | THEME STYLE */
-  --fnt-default: #db88ae;
+  --fnt-rose: #db88ae;
   --fnt-error: #ff6747;
   --fnt-border-radius: 8px;
   --fnt-border-width: 1px;
@@ -30,7 +30,7 @@
   --fnt-mantle: #0b0b0b;
   --fnt-shadow: #010409;
 
-  --fnt-accent: var(--fnt-default);
+  --fnt-accent: var(--fnt-blue);
   color-scheme: dark;
 }
 

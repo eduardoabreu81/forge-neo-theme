@@ -25,12 +25,12 @@ from modules.scripts import basedir
 # --- CONSTANTS ---
 SECTION = ('fnt', 'Forge Neo Theme')
 ACCENTS = (
-    'default',
     'blue',
     'green',
     'peach',
     'pink',
     'red',
+    'rose',
     'yellow'
 )
 SCRIPT_PATH = Path(basedir())
@@ -106,7 +106,7 @@ def select_base_css():
 
 def update_accent_in_css():
     """Update the accent color variable in the main CSS file"""
-    current_accent = getattr(opts, 'fnt_accent_color', 'default')
+    current_accent = getattr(opts, 'fnt_accent_color', 'blue')
     custom_hex = getattr(opts, 'fnt_custom_hex_color', '')
 
     if custom_hex:
@@ -151,8 +151,8 @@ def handle_cmd_accent():
             opts.fnt_accent_color = arg_color
             logger.info(f"Using command line accent color: {arg_color}")
         else:
-            opts.fnt_accent_color = 'default'
-            logger.warning(f"Invalid command line color '{cmd_opts.forge_neo_theme_accent}'. Defaulting to 'default'.")
+            opts.fnt_accent_color = 'blue'
+            logger.warning(f"Invalid command line color '{cmd_opts.forge_neo_theme_accent}'. Defaulting to 'blue'.")
             logger.info(f"Available accent colors: {', '.join(ACCENTS)}")
 
 
@@ -187,7 +187,7 @@ def on_settings():
     opts.add_option(
         'fnt_accent_color',
         OptionInfo(
-            default='default',
+            default='blue',
             label='Accent Color',
             component=gr.Radio,
             component_args={'choices': ACCENTS},
