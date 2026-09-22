@@ -113,6 +113,6 @@ MIT — see [LICENSE](LICENSE)
 
 Made with ❤️ for the Stable Diffusion community
 
-**[Report Bug](https://github.com/eduardoabreu81/forge-neo-theme/issues)** • **[Request Feature](https://github.com/eduardoabreu81/forge-neo-theme/issues)**
+**[Report Bug](https://github.com/eduardoabreu81/forge-neo-theme/issues)** • **[Request Feature](https://github.com/eduardoabreu81/forge-neo-theme/issues)** • **[☕ Ko-fi](https://ko-fi.com/eduardoabreu81)**
 
 </div>
